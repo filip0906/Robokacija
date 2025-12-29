@@ -521,6 +521,17 @@ footer {
         padding: 1.5rem;
     }
 
+    /* Form responsiveness */
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    /* Map responsiveness */
+    .map-container {
+        height: 300px;
+    }
+
     /* Shop specific */
     #roboshop {
         padding-top: 100px !important; /* Override inline style */
@@ -613,6 +624,12 @@ footer {
     border-color: var(--secondary-color);
     box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.1);
     transform: scale(1.01);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
 }
 
 .team-member {
