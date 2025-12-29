@@ -456,10 +456,11 @@ footer {
         text-align: center;
         background: var(--white);
         position: absolute;
-        top: 90px;
+        top: 100%; /* Changed from 90px to 100% to align with bottom of header */
         left: 0;
         box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         border-radius: 0 0 20px 20px;
+        z-index: 999; /* Ensure it's above other content */
     }
 
     .nav-links.active {
@@ -470,16 +471,78 @@ footer {
         transform: none;
     }
 
+    .hero {
+        padding: 100px 0 120px; /* Reduced padding */
+    }
+
     .hero h1 {
-        font-size: 2.8rem;
+        font-size: 2.5rem; /* Slightly smaller */
     }
     
     .hero-buttons {
         flex-direction: column;
+        gap: 1rem;
     }
     
     .section-title {
-        font-size: 2.2rem;
+        font-size: 2rem;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr; /* Force single column */
+        gap: 2rem;
+    }
+
+    .card {
+        padding: 1.5rem; /* Reduced padding in cards */
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+    }
+
+    /* Table responsiveness */
+    .user-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Modal responsiveness */
+    .modal-content {
+        width: 95%;
+        margin: 20% auto;
+        padding: 1.5rem;
+    }
+
+    /* Shop specific */
+    #roboshop {
+        padding-top: 100px !important; /* Override inline style */
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        width: 100%; /* Full width buttons on small screens */
+        padding: 12px 20px;
+    }
+
+    .container {
+        padding: 0 15px;
     }
 }
 
