@@ -21,16 +21,16 @@
             <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
             <nav class="nav-links">
                 <a href="#home" class="active">Početna</a>
-                <a href="shop.html" style="color: var(--secondary-color); font-weight: 800;"><i class="fas fa-shopping-cart"></i> RoboShop</a>
+                <a href="shop.html" class="text-secondary font-extra-bold"><i class="fas fa-shopping-cart"></i> RoboShop</a>
                 <a href="#junior">Junior</a>
                 <a href="#program">Naš Program</a>
                 <a href="#prijave">Prijave</a>
                 <a href="#o-nama">O Nama</a>
                 <a href="#kontakt">Kontakt</a>
-                <button id="loginBtn" class="btn btn-sm btn-primary" style="margin-left: 10px;">Prijava</button>
-                <div id="userProfile" style="display: none; align-items: center; gap: 10px; margin-left: 10px;">
-                    <span id="userName" style="font-weight: bold; color: var(--primary-color);">Korisnik</span>
-                    <button id="logoutBtn" class="btn btn-sm btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;">Odjava</button>
+                <button id="loginBtn" class="btn btn-sm btn-primary ml-2">Prijava</button>
+                <div id="userProfile" class="user-profile">
+                    <span id="userName" class="font-bold text-primary">Korisnik</span>
+                    <button id="logoutBtn" class="btn btn-sm btn-secondary btn-logout">Odjava</button>
                 </div>
             </nav>
         </div>
@@ -39,7 +39,7 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <h1 id="heroTitle">I JA ZNAM IZRADITI ROBOTA</h1>
+            <h1 id="heroTitle">ZNAM I JA IZRADITI ROBOTA</h1>
             <p id="heroDesc">STEM radionice iz robotike, programiranja i elektronike za djecu i mlade. Pridružite nam se i otkrijte svijet tehnologije!</p>
             <div class="hero-buttons">
                 <a href="#prijave" class="btn btn-primary">Rezervirajte mjesto</a>
@@ -82,7 +82,7 @@
     </section>
 
     <!-- Senior Program Section -->
-    <section id="program" class="grid-section" style="background-color: var(--white);">
+    <section id="program" class="grid-section bg-white">
         <div class="container">
             <h2 class="section-title">Senior Program</h2>
             <p class="section-subtitle">Napredna robotika kroz 8 modula</p>
@@ -134,55 +134,55 @@
             <h2 class="section-title">Prijave</h2>
             <p class="section-subtitle">Rezervirajte mjesto za Zimski Kamp ili radionice</p>
             
-            <div class="grid-3" style="margin-bottom: 3rem;">
-                <div class="card" style="border-color: var(--secondary-color);">
+            <div class="grid-3 mb-5">
+                <div class="card border-secondary">
                     <h3>Zimski Kamp</h3>
                     <div class="price-tag">150€</div>
                     <p>3 dana intenzivne zabave! Izradi svoju pametnu lampu ili 3D model.</p>
                     <button class="btn btn-primary" onclick="document.getElementById('program-select').value='Zimski Kamp'; document.getElementById('booking-form').scrollIntoView();">Odaberi</button>
                 </div>
-                <div class="card" style="border-color: var(--primary-color);">
+                <div class="card border-primary">
                     <h3>Cjelogodišnji</h3>
-                    <div class="price-tag">55€<span style="font-size: 1rem; color: var(--text-light);">/mj</span></div>
+                    <div class="price-tag">55€<span class="fs-md text-light">/mj</span></div>
                     <p>Redovne tjedne radionice tijekom cijele školske godine.</p>
                     <button class="btn btn-primary" onclick="document.getElementById('program-select').value='Cjelogodišnji'; document.getElementById('booking-form').scrollIntoView();">Odaberi</button>
                 </div>
             </div>
 
-            <div id="booking-form" class="card" style="max-width: 800px; margin: 0 auto;">
-                <h3 style="text-align: center;">Prijavnica</h3>
+            <div id="booking-form" class="card max-w-800 mx-auto">
+                <h3 class="text-center">Prijavnica</h3>
                 <form>
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Roditelj</label>
-                            <input type="text" placeholder="Ime i prezime" required>
+                            <label for="parentName">Roditelj</label>
+                            <input type="text" id="parentName" placeholder="Ime i prezime" required>
                         </div>
                         <div class="form-group">
-                            <label>Telefon</label>
-                            <input type="tel" placeholder="09x xxx xxxx" required>
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" placeholder="09x xxx xxxx" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" placeholder="email@adresa.com" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="email@adresa.com" required>
                     </div>
                     <div class="form-group">
-                        <label>Program</label>
-                        <select id="program-select">
+                        <label for="program-select">Program</label>
+                        <select id="program-select" aria-label="Odaberite program">
                             <option value="">-- Odaberite --</option>
                             <option value="Zimski Kamp">Zimski Kamp 2025</option>
                             <option value="Cjelogodišnji">Cjelogodišnji Program</option>
                             <option value="Junior">Junior Program</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Pošalji Prijavu</button>
+                    <button type="submit" class="btn btn-primary w-100">Pošalji Prijavu</button>
                 </form>
             </div>
         </div>
     </section>
 
     <!-- O Nama Section -->
-    <section id="o-nama" class="grid-section" style="background-color: var(--white);">
+    <section id="o-nama" class="grid-section bg-white">
         <div class="container">
             <h2 class="section-title">O Nama</h2>
             <p class="section-subtitle">Tim inženjera i edukatora</p>
@@ -205,9 +205,9 @@
                 </div>
             </div>
             
-            <div style="text-align: center; margin-top: 3rem;">
-                <div class="card" style="display: inline-block; max-width: 600px;">
-                    <div class="card-icon" style="margin: 0 auto 1rem;"><i class="fas fa-heart"></i></div>
+            <div class="text-center mt-5">
+                <div class="card d-inline-block max-w-600">
+                    <div class="card-icon mx-auto mb-3"><i class="fas fa-heart"></i></div>
                     <h3>Naša Misija</h3>
                     <p>Prenijeti djeci znanje o tehnologiji i temeljne ljudske vrline kojima će učiniti svijet boljim mjestom.</p>
                 </div>
@@ -222,19 +222,19 @@
             <div class="grid-3">
                 <div class="card">
                     <h3>Javite nam se</h3>
-                    <ul style="margin-top: 1rem; font-size: 1.1rem;">
-                        <li style="margin-bottom: 1rem;"><i class="fas fa-map-marker-alt" style="color: var(--secondary-color); width: 30px;"></i> Palinovečka 19E, Zagreb</li>
-                        <li style="margin-bottom: 1rem;"><i class="fas fa-phone" style="color: var(--secondary-color); width: 30px;"></i> 099 880 1864</li>
-                        <li style="margin-bottom: 1rem;"><i class="fas fa-envelope" style="color: var(--secondary-color); width: 30px;"></i> info@robokacija.hr</li>
+                    <ul class="contact-list mt-3 fs-lg">
+                        <li><i class="fas fa-map-marker-alt contact-icon"></i> Palinovečka 19E, Zagreb</li>
+                        <li><i class="fas fa-phone contact-icon"></i> 099 880 1864</li>
+                        <li><i class="fas fa-envelope contact-icon"></i> info@robokacija.hr</li>
                     </ul>
-                    <div class="social-links" style="margin-top: 2rem; justify-content: center;">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    <div class="social-links mt-4 justify-center">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.797963686646!2d15.92345631556863!3d45.79528897910626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765d6b0c0b0b0b1%3A0x400ad50862bc0!2sPalinove%C4%8Dka%20ul.%2019E%2C%2010000%2C%20Zagreb!5e0!3m2!1sen!2shr!4v1646123456789!5m2!1sen!2shr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    <iframe title="Lokacija Robokacije" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2781.797963686646!2d15.92345631556863!3d45.79528897910626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765d6b0c0b0b0b1%3A0x400ad50862bc0!2sPalinove%C4%8Dka%20ul.%2019E%2C%2010000%2C%20Zagreb!5e0!3m2!1sen!2shr!4v1646123456789!5m2!1sen!2shr" class="map-iframe" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -244,13 +244,13 @@
     <footer>
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; 2025 Robokacija. Sva prava pridržana. | <a href="admin.html" style="color: var(--text-light); font-size: 0.8rem; text-decoration: none; opacity: 0.5;">Admin</a></p>
+                <p>&copy; 2025 Robokacija. Sva prava pridržana. | <a href="admin.html" class="text-light fs-sm no-decoration opacity-50">Admin</a></p>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <a href="#home" id="backToTop" class="btn btn-primary" style="position: fixed; bottom: 20px; right: 20px; padding: 15px; border-radius: 50%; display: none; z-index: 999;">
+    <a href="#home" id="backToTop" class="btn btn-primary back-to-top" aria-label="Povratak na vrh">
         <i class="fas fa-arrow-up"></i>
     </a>
 
@@ -261,15 +261,15 @@
             <h2 id="modalTitle">Prijava u RoboShop</h2>
             <form id="loginForm">
                 <div class="form-group">
-                    <label>Email</label>
+                    <label for="loginEmail">Email</label>
                     <input type="email" id="loginEmail" required>
                 </div>
                 <div class="form-group">
-                    <label>Lozinka</label>
+                    <label for="loginPassword">Lozinka</label>
                     <input type="password" id="loginPassword" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;" id="submitBtn">Prijavi se</button>
-                <p style="margin-top: 1rem; text-align: center; font-size: 0.9rem; cursor: pointer; color: var(--secondary-color); font-weight: bold;" id="toggleAuthMode">
+                <button type="submit" class="btn btn-primary w-100" id="submitBtn">Prijavi se</button>
+                <p id="toggleAuthMode" class="modal-toggle-text">
                     Nemate račun? Registrirajte se
                 </p>
             </form>

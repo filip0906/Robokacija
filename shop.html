@@ -21,26 +21,26 @@
             <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
             <nav class="nav-links">
                 <a href="index.html">Početna</a>
-                <a href="shop.html" class="active" style="color: var(--secondary-color); font-weight: 800;"><i class="fas fa-shopping-cart"></i> RoboShop</a>
-                <button id="loginBtn" class="btn btn-sm btn-primary" style="margin-left: 10px;">Prijava</button>
-                <div id="userProfile" style="display: none; align-items: center; gap: 10px; margin-left: 10px;">
-                    <span id="userName" style="font-weight: bold; color: var(--primary-color);">Korisnik</span>
-                    <button id="logoutBtn" class="btn btn-sm btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;">Odjava</button>
+                <a href="shop.html" class="active text-secondary font-extra-bold"><i class="fas fa-shopping-cart"></i> RoboShop</a>
+                <button id="loginBtn" class="btn btn-sm btn-primary ml-2">Prijava</button>
+                <div id="userProfile" class="user-profile">
+                    <span id="userName" class="font-bold text-primary">Korisnik</span>
+                    <button id="logoutBtn" class="btn btn-sm btn-secondary btn-logout">Odjava</button>
                 </div>
             </nav>
         </div>
     </header>
 
     <!-- RoboShop Section -->
-    <section id="roboshop" class="grid-section" style="background-color: var(--light-bg); position: relative; padding-top: 150px; min-height: 80vh;">
+    <section id="roboshop" class="grid-section bg-light relative pt-150 min-h-80">
         <div class="container">
-            <h2 class="section-title" style="color: var(--secondary-color);">RoboShop <i class="fas fa-shopping-cart"></i></h2>
+            <h2 class="section-title text-secondary">RoboShop <i class="fas fa-shopping-cart"></i></h2>
             <p class="section-subtitle">Skupljaj RoboCoine i zamijeni ih za super nagrade!</p>
             
             <!-- Guest Message -->
-            <div id="guestMessage" style="text-align: center; margin-bottom: 3rem;">
-                <div class="card" style="max-width: 500px; margin: 0 auto; background: var(--white);">
-                    <i class="fas fa-lock" style="font-size: 3rem; color: var(--text-light); margin-bottom: 1rem;"></i>
+            <div id="guestMessage" class="text-center mb-5">
+                <div class="card max-w-500 mx-auto bg-white">
+                    <i class="fas fa-lock fs-xl text-light mb-3"></i>
                     <h3>Prijavi se za pregled stanja</h3>
                     <p>Moraš biti prijavljen da bi vidio svoje RoboCoine i kupovao nagrade.</p>
                     <button class="btn btn-primary" onclick="document.getElementById('loginModal').style.display='block'">Prijavi se</button>
@@ -48,18 +48,18 @@
             </div>
 
             <!-- User Balance (Hidden for guests) -->
-            <div id="userBalanceSection" class="balance-card" style="display: none;">
+            <div id="userBalanceSection" class="balance-card d-none">
                 <span>Tvoj saldo:</span>
                 <div class="coin-display">
                     <i class="fas fa-coins"></i> <span id="userPoints">0</span> RC
                 </div>
-                <small style="display: block; margin-top: 5px; color: var(--text-light);">Prijavi se kod učitelja za bodove!</small>
+                <small class="d-block mt-2 text-light">Prijavi se kod učitelja za bodove!</small>
             </div>
 
             <div class="grid-3" id="shopGrid">
                 <!-- Items will be loaded dynamically from Firestore -->
-                <div style="grid-column: 1/-1; text-align: center; padding: 50px;">
-                    <i class="fas fa-spinner fa-spin fa-3x" style="color: var(--secondary-color);"></i>
+                <div class="loading-container">
+                    <i class="fas fa-spinner fa-spin fa-3x text-secondary"></i>
                     <p>Učitavanje artikala...</p>
                 </div>
             </div>
@@ -70,7 +70,7 @@
     <footer>
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; 2025 Robokacija. Sva prava pridržana. | <a href="admin.html" style="color: var(--text-light); font-size: 0.8rem; text-decoration: none; opacity: 0.5;">Admin</a></p>
+                <p>&copy; 2025 Robokacija. Sva prava pridržana. | <a href="admin.html" class="text-light fs-sm no-decoration opacity-50">Admin</a></p>
             </div>
         </div>
     </footer>
@@ -82,15 +82,15 @@
             <h2 id="modalTitle">Prijava u RoboShop</h2>
             <form id="loginForm">
                 <div class="form-group">
-                    <label>Email</label>
+                    <label for="loginEmail">Email</label>
                     <input type="email" id="loginEmail" required>
                 </div>
                 <div class="form-group">
-                    <label>Lozinka</label>
+                    <label for="loginPassword">Lozinka</label>
                     <input type="password" id="loginPassword" required>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;" id="submitBtn">Prijavi se</button>
-                <p style="margin-top: 1rem; text-align: center; font-size: 0.9rem; cursor: pointer; color: var(--secondary-color); font-weight: bold;" id="toggleAuthMode">
+                <button type="submit" class="btn btn-primary w-100" id="submitBtn">Prijavi se</button>
+                <p id="toggleAuthMode" class="modal-toggle-text">
                     Nemate račun? Registrirajte se
                 </p>
             </form>

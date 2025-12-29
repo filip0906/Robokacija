@@ -37,40 +37,40 @@
             <a href="index.html" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Povratak na web</a>
         </div>
 
-        <div class="card" style="margin-bottom: 30px;">
+        <div class="card mb-4">
             <h3>Uređivanje Sadržaja (Naslovnica)</h3>
             <p>Promijenite glavni naslov i tekst na početnoj stranici.</p>
-            <div style="display: grid; gap: 15px; margin-top: 20px;">
+            <div class="d-grid gap-3 mt-3">
                 <div class="form-group">
-                    <label style="display:block; font-weight:bold; margin-bottom:5px;">Glavni Naslov</label>
-                    <input type="text" id="editHeroTitle" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;">
+                    <label for="editHeroTitle" class="d-block font-bold mb-2">Glavni Naslov</label>
+                    <input type="text" id="editHeroTitle" class="admin-input">
                 </div>
                 <div class="form-group">
-                    <label style="display:block; font-weight:bold; margin-bottom:5px;">Podnaslov / Opis</label>
-                    <textarea id="editHeroDesc" rows="3" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;"></textarea>
+                    <label for="editHeroDesc" class="d-block font-bold mb-2">Podnaslov / Opis</label>
+                    <textarea id="editHeroDesc" rows="3" class="admin-textarea"></textarea>
                 </div>
-                <button onclick="saveContent()" class="btn btn-primary" style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Spremi Promjene</button>
+                <button onclick="saveContent()" class="btn btn-primary cursor-pointer">Spremi Promjene</button>
             </div>
         </div>
 
-        <div class="card" style="margin-bottom: 30px;">
+        <div class="card mb-4">
             <h3>Upravljanje Shop Artiklima</h3>
             <p>Dodajte ili uklonite artikle iz RoboShopa.</p>
             
             <!-- Add New Item Form -->
-            <div style="background: #f8fafc; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
-                <h4 style="margin-bottom: 10px;">Dodaj Novi Artikl</h4>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <input type="text" id="newItemName" placeholder="Naziv artikla" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
-                    <input type="number" id="newItemPrice" placeholder="Cijena (RC)" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
-                    <input type="text" id="newItemIcon" placeholder="FontAwesome ikona (npr. fas fa-robot)" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
-                    <input type="text" id="newItemDesc" placeholder="Kratki opis" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+            <div class="bg-light p-3 rounded mb-3 border">
+                <h4 class="mb-2">Dodaj Novi Artikl</h4>
+                <div class="add-item-grid">
+                    <input type="text" id="newItemName" placeholder="Naziv artikla" class="add-item-input" aria-label="Naziv artikla">
+                    <input type="number" id="newItemPrice" placeholder="Cijena (RC)" class="add-item-input" aria-label="Cijena">
+                    <input type="text" id="newItemIcon" placeholder="FontAwesome ikona (npr. fas fa-robot)" class="add-item-input" aria-label="Ikona">
+                    <input type="text" id="newItemDesc" placeholder="Kratki opis" class="add-item-input" aria-label="Opis">
                 </div>
-                <button onclick="addShopItem()" class="btn btn-primary" style="margin-top: 10px; width: 100%;">Dodaj Artikl</button>
+                <button onclick="addShopItem()" class="btn btn-primary w-100 mt-2">Dodaj Artikl</button>
             </div>
 
             <!-- Items List -->
-            <div style="overflow-x: auto;">
+            <div class="overflow-auto">
                 <table class="user-table">
                     <thead>
                         <tr>
@@ -90,7 +90,7 @@
             <h3>Upravljanje Bodovima</h3>
             <p>Ovdje možete dodijeliti RoboCoine polaznicima.</p>
             
-            <div style="overflow-x: auto; margin-top: 20px;">
+            <div class="overflow-auto mt-3">
                 <table class="user-table">
                     <thead>
                         <tr>
