@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robokacija - Admin Panel</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        body { background-color: #f1f5f9; }
+        .admin-container { max-width: 1000px; margin: 50px auto; padding: 20px; }
+        .user-table { width: 100%; border-collapse: collapse; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .user-table th, .user-table td { padding: 15px; text-align: left; border-bottom: 1px solid #e2e8f0; }
+        .user-table th { background-color: var(--primary-color); color: white; font-family: 'Fredoka', sans-serif; }
+        .user-table tr:last-child td { border-bottom: none; }
+        .action-btn { padding: 5px 10px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; margin-right: 5px; color: white; }
+        .btn-add { background-color: var(--accent-green); }
+        .btn-sub { background-color: #ef4444; }
+        .points-badge { background: var(--secondary-color); color: white; padding: 5px 10px; border-radius: 20px; font-weight: bold; }
+        .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <div class="admin-header">
+            <h1><i class="fas fa-user-shield"></i> Admin Panel</h1>
+            <a href="index.html" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Povratak na web</a>
+        </div>
+
+        <div class="card" style="margin-bottom: 30px;">
+            <h3>Uređivanje Sadržaja (Naslovnica)</h3>
+            <p>Promijenite glavni naslov i tekst na početnoj stranici.</p>
+            <div style="display: grid; gap: 15px; margin-top: 20px;">
+                <div class="form-group">
+                    <label style="display:block; font-weight:bold; margin-bottom:5px;">Glavni Naslov</label>
+                    <input type="text" id="editHeroTitle" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;">
+                </div>
+                <div class="form-group">
+                    <label style="display:block; font-weight:bold; margin-bottom:5px;">Podnaslov / Opis</label>
+                    <textarea id="editHeroDesc" rows="3" style="width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;"></textarea>
+                </div>
+                <button onclick="saveContent()" class="btn btn-primary" style="background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Spremi Promjene</button>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 30px;">
+            <h3>Upravljanje Shop Artiklima</h3>
+            <p>Dodajte ili uklonite artikle iz RoboShopa.</p>
+            
+            <!-- Add New Item Form -->
+            <div style="background: #f8fafc; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px solid #e2e8f0;">
+                <h4 style="margin-bottom: 10px;">Dodaj Novi Artikl</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <input type="text" id="newItemName" placeholder="Naziv artikla" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                    <input type="number" id="newItemPrice" placeholder="Cijena (RC)" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                    <input type="text" id="newItemIcon" placeholder="FontAwesome ikona (npr. fas fa-robot)" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                    <input type="text" id="newItemDesc" placeholder="Kratki opis" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+                </div>
+                <button onclick="addShopItem()" class="btn btn-primary" style="margin-top: 10px; width: 100%;">Dodaj Artikl</button>
+            </div>
+
+            <!-- Items List -->
+            <div style="overflow-x: auto;">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Artikl</th>
+                            <th>Cijena</th>
+                            <th>Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody id="shopItemsList">
+                        <!-- Items will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Upravljanje Bodovima</h3>
+            <p>Ovdje možete dodijeliti RoboCoine polaznicima.</p>
+            
+            <div style="overflow-x: auto; margin-top: 20px;">
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Ime / Email</th>
+                            <th>Trenutno Stanje</th>
+                            <th>Akcije</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userList">
+                        <tr>
+                            <td colspan="3" style="text-align: center;">Učitavanje korisnika...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script>
+        // Check if user is logged in and is admin
+        auth.onAuthStateChanged((user) => {
+            if (!user) {
+                document.body.innerHTML = '<div style="text-align:center; margin-top:50px;"><h1>Pristup odbijen</h1><p>Morate biti prijavljeni.</p><a href="index.html">Povratak</a></div>';
+            } else {
+                // Check role in Firestore
+                db.collection("users").doc(user.uid).get().then((doc) => {
+                    if (doc.exists && doc.data().role === 'admin') {
+                        loadUsers();
+                        loadContent();
+                        loadShopItems();
+                    } else {
+                        document.body.innerHTML = '<div style="text-align:center; margin-top:50px;"><h1>Pristup odbijen</h1><p>Nemate administratorska prava.</p><a href="index.html">Povratak</a></div>';
+                    }
+                }).catch((error) => {
+                    console.error("Error checking admin role:", error);
+                    document.body.innerHTML = '<div style="text-align:center; margin-top:50px;"><h1>Greška</h1><p>Došlo je do greške pri provjeri prava.</p><a href="index.html">Povratak</a></div>';
+                });
+            }
+        });
+
+        function loadContent() {
+            db.collection("site_content").doc("home_hero").get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    document.getElementById('editHeroTitle').value = data.title || '';
+                    document.getElementById('editHeroDesc').value = data.description || '';
+                }
+            });
+        }
+
+        function saveContent() {
+            const title = document.getElementById('editHeroTitle').value;
+            const desc = document.getElementById('editHeroDesc').value;
+
+            db.collection("site_content").doc("home_hero").set({
+                title: title,
+                description: desc
+            })
+            .then(() => {
+                alert("Sadržaj uspješno spremljen!");
+            })
+            .catch((error) => {
+                alert("Greška pri spremanju: " + error);
+            });
+        }
+
+        function loadShopItems() {
+            const list = document.getElementById('shopItemsList');
+            db.collection("shop_items").onSnapshot((snapshot) => {
+                list.innerHTML = '';
+                snapshot.forEach((doc) => {
+                    const item = doc.data();
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>
+                            <div style="font-weight:bold;"><i class="${item.icon}"></i> ${item.name}</div>
+                            <div style="font-size:0.8rem; color:#666;">${item.description}</div>
+                        </td>
+                        <td>${item.price} RC</td>
+                        <td>
+                            <button onclick="deleteShopItem('${doc.id}')" class="action-btn btn-sub"><i class="fas fa-trash"></i></button>
+                        </td>
+                    `;
+                    list.appendChild(tr);
+                });
+            });
+        }
+
+        function addShopItem() {
+            const name = document.getElementById('newItemName').value;
+            const price = parseInt(document.getElementById('newItemPrice').value);
+            const icon = document.getElementById('newItemIcon').value || 'fas fa-box';
+            const desc = document.getElementById('newItemDesc').value;
+
+            if(!name || !price) {
+                alert("Naziv i cijena su obavezni!");
+                return;
+            }
+
+            db.collection("shop_items").add({
+                name: name,
+                price: price,
+                icon: icon,
+                description: desc,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                alert("Artikl dodan!");
+                // Clear inputs
+                document.getElementById('newItemName').value = '';
+                document.getElementById('newItemPrice').value = '';
+                document.getElementById('newItemDesc').value = '';
+            }).catch((err) => alert("Greška: " + err));
+        }
+
+        function deleteShopItem(id) {
+            if(confirm("Jeste li sigurni da želite obrisati ovaj artikl?")) {
+                db.collection("shop_items").doc(id).delete().catch(err => alert("Greška: " + err));
+            }
+        }
+
+        function loadUsers() {
+            const userList = document.getElementById('userList');
+            
+            // Listen to users collection in real-time
+            db.collection("users").onSnapshot((snapshot) => {
+                userList.innerHTML = '';
+                snapshot.forEach((doc) => {
+                    const user = doc.data();
+                    const tr = document.createElement('tr');
+                    
+                    tr.innerHTML = `
+                        <td>
+                            <div style="font-weight:bold;">${user.name || 'Nepoznato'} <span style="font-size:0.7rem; background:#eee; padding:2px 5px; border-radius:4px;">${user.role || 'user'}</span></div>
+                            <div style="font-size:0.8rem; color:#666;">${user.email}</div>
+                            <div style="margin-top:5px;">
+                                <select onchange="updateModule('${doc.id}', this.value)" style="padding:4px; border-radius:4px; border:1px solid #ccc; font-size:0.8rem; width: 100%;">
+                                    <option value="">-- Odaberi Modul --</option>
+                                    <option value="Modul 1: Svjetlost" ${user.currentModule === 'Modul 1: Svjetlost' ? 'selected' : ''}>Modul 1: Svjetlost</option>
+                                    <option value="Modul 2: Zvuk" ${user.currentModule === 'Modul 2: Zvuk' ? 'selected' : ''}>Modul 2: Zvuk</option>
+                                    <option value="Modul 3: Pokret" ${user.currentModule === 'Modul 3: Pokret' ? 'selected' : ''}>Modul 3: Pokret</option>
+                                    <option value="Modul 4: Komunikacija" ${user.currentModule === 'Modul 4: Komunikacija' ? 'selected' : ''}>Modul 4: Komunikacija</option>
+                                    <option value="Modul 5: Dodir" ${user.currentModule === 'Modul 5: Dodir' ? 'selected' : ''}>Modul 5: Dodir</option>
+                                    <option value="Modul 6: Hidrodinamika" ${user.currentModule === 'Modul 6: Hidrodinamika' ? 'selected' : ''}>Modul 6: Hidrodinamika</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td><span class="points-badge">${user.points || 0} RC</span></td>
+                        <td>
+                            <div style="display:flex; gap:5px; align-items:center;">
+                                <input type="number" id="pointsInput_${doc.id}" placeholder="Iznos" style="width:70px; padding:5px; border:1px solid #ccc; border-radius:4px;">
+                                <button onclick="manualUpdatePoints('${doc.id}', 1)" class="action-btn btn-add" title="Dodaj"><i class="fas fa-plus"></i></button>
+                                <button onclick="manualUpdatePoints('${doc.id}', -1)" class="action-btn btn-sub" title="Oduzmi"><i class="fas fa-minus"></i></button>
+                            </div>
+                        </td>
+                    `;
+                    userList.appendChild(tr);
+                });
+                
+                if(snapshot.empty) {
+                    userList.innerHTML = '<tr><td colspan="3" style="text-align:center;">Nema registriranih korisnika.</td></tr>';
+                }
+            });
+        }
+
+        window.manualUpdatePoints = function(userId, multiplier) {
+            const input = document.getElementById(`pointsInput_${userId}`);
+            const amount = parseInt(input.value);
+            
+            if(isNaN(amount) || amount <= 0) {
+                alert("Molimo unesite valjani broj bodova.");
+                return;
+            }
+
+            updatePoints(userId, amount * multiplier);
+            input.value = ''; // Clear input
+        }
+
+        window.updateModule = function(userId, moduleName) {
+            db.collection("users").doc(userId).update({
+                currentModule: moduleName
+            }).then(() => {
+                console.log("Modul ažuriran");
+            }).catch((err) => {
+                alert("Greška pri ažuriranju modula: " + err);
+            });
+        }
+
+        window.updatePoints = function(userId, amount) {
+            const userRef = db.collection("users").doc(userId);
+            
+            db.runTransaction((transaction) => {
+                return transaction.get(userRef).then((userDoc) => {
+                    if (!userDoc.exists) throw "User does not exist!";
+                    const newPoints = (userDoc.data().points || 0) + amount;
+                    transaction.update(userRef, { points: newPoints });
+                    return newPoints;
+                });
+            }).then(() => {
+                // Success (UI updates automatically via onSnapshot)
+                console.log("Points updated");
+            }).catch((err) => {
+                alert("Greška: " + err);
+            });
+        }
+    </script>
+</body>
+</html>
