@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prijave - Robokacija</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container navbar">
+            <a href="index.html" class="logo">
+                <i class="fas fa-robot"></i> ROBOKACIJA
+            </a>
+            <div class="mobile-menu-btn">☰</div>
+            <nav class="nav-links">
+                <a href="index.html">Početna</a>
+                <a href="nas-program.html">Naš program</a>
+                <a href="junior.html">Junior</a>
+                <a href="prijave.html" class="active">Prijave</a>
+                <a href="o-nama.html">O nama</a>
+                <a href="kontakt.html">Kontakt</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+        <div class="container">
+            <h1>Prijave u tijeku</h1>
+            <p>Rezervirajte mjesto za Zimski STEM Kamp ili cjelogodišnje radionice</p>
+        </div>
+    </section>
+
+    <!-- Winter Camp Info -->
+    <section class="grid-section">
+        <div class="container">
+            <h2 class="section-title">Zimski STEM Kamp 2025</h2>
+            <p class="section-subtitle">3 dana intenzivne zabave i učenja!</p>
+            
+            <div class="grid-3">
+                <div class="card" style="border-top: 4px solid var(--primary-color);">
+                    <h3>Pametna Lampa</h3>
+                    <p>Za učenike 4.-8. razreda</p>
+                    <div class="price-tag">170 €</div>
+                    <ul style="margin-bottom: 1.5rem; text-align: left;">
+                        <li><i class="fas fa-check"></i> Izrada pametne lampe</li>
+                        <li><i class="fas fa-check"></i> Učenje elektronike</li>
+                        <li><i class="fas fa-check"></i> Lampu nosite kući</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="document.getElementById('program').value='Pametna Lampa';document.getElementById('booking-form').scrollIntoView();">Odaberi</button>
+                </div>
+
+                <div class="card" style="border-top: 4px solid var(--secondary-color);">
+                    <h3>Tajne 3D Printanja</h3>
+                    <p>Za učenike 4.-8. razreda</p>
+                    <div class="price-tag">150 €</div>
+                    <ul style="margin-bottom: 1.5rem; text-align: left;">
+                        <li><i class="fas fa-check"></i> 3D modeliranje</li>
+                        <li><i class="fas fa-check"></i> Rad s 3D printerima</li>
+                        <li><i class="fas fa-check"></i> Printane modele nosite kući</li>
+                    </ul>
+                    <button class="btn btn-secondary" onclick="document.getElementById('program').value='3D Printanje';document.getElementById('booking-form').scrollIntoView();">Odaberi</button>
+                </div>
+
+                <div class="card" style="border-top: 4px solid var(--accent-color);">
+                    <h3>Robo-Juniori</h3>
+                    <p>Za učenike 1.-3. razreda</p>
+                    <div class="price-tag">150 €</div>
+                    <ul style="margin-bottom: 1.5rem; text-align: left;">
+                        <li><i class="fas fa-check"></i> Edison roboti</li>
+                        <li><i class="fas fa-check"></i> 3D olovka</li>
+                        <li><i class="fas fa-check"></i> Učenje kroz igru</li>
+                    </ul>
+                    <button class="btn btn-primary" style="background-color: var(--accent-color);" onclick="document.getElementById('program').value='Robo-Juniori';document.getElementById('booking-form').scrollIntoView();">Odaberi</button>
+                </div>
+            </div>
+
+            <div style="margin-top: 3rem; text-align: center;">
+                <p><strong>Termini:</strong> 29.12. – 31.12. ili 7.1. – 9.1.</p>
+                <p><strong>Lokacija:</strong> Palinovečka 19E, Jarun</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form -->
+    <section id="booking-form" class="grid-section" style="background-color: var(--white);">
+        <div class="container">
+            <h2 class="section-title">Prijavnica</h2>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <form>
+                    <div class="form-group">
+                        <label for="parentName">Ime i prezime roditelja</label>
+                        <input type="text" id="parentName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email adresa</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Broj mobitela</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="childName">Ime i prezime djeteta</label>
+                        <input type="text" id="childName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="childAge">Razred / Dob djeteta</label>
+                        <input type="text" id="childAge" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="program">Odabrani program</label>
+                        <select id="program" required>
+                            <option value="">-- Odaberite program --</option>
+                            <option value="Pametna Lampa">Pametna Lampa (170€)</option>
+                            <option value="3D Printanje">Tajne 3D Printanja (150€)</option>
+                            <option value="Robo-Juniori">Robo-Juniori (150€)</option>
+                            <option value="Cjelogodišnji">Cjelogodišnji program</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Napomena</label>
+                        <textarea id="message" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Pošalji Prijavu</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Robokacija</h4>
+                    <p>Vaš partner za STEM edukaciju. Učimo djecu vještinama budućnosti.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Brzi linkovi</h4>
+                    <ul>
+                        <li><a href="index.html">Početna</a></li>
+                        <li><a href="nas-program.html">Naš program</a></li>
+                        <li><a href="prijave.html">Prijave</a></li>
+                        <li><a href="kontakt.html">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> 099 880 1864</li>
+                        <li><i class="fas fa-envelope"></i> info@robokacija.hr</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Palinovečka 19E, Zagreb</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Pratite nas</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Robokacija. Sva prava pridržana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
