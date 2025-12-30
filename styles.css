@@ -616,7 +616,33 @@ footer {
 
     /* Shop specific */
     #roboshop {
-        padding-top: 100px !important; /* Override inline style */
+        padding-top: 110px !important; /* Override inline style */
+    }
+
+    .balance-card {
+        width: 100%;
+        max-width: 100%;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .coin-display {
+        font-size: 2.5rem;
+    }
+
+    .shop-footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .shop-footer .price {
+        font-size: 1.5rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .btn-shop {
+        width: 100%;
     }
 
     /* Hide decorative elements on mobile */
