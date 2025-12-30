@@ -323,6 +323,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    // --- BOOKING FORM LOGIC ---
+    const bookingForm = document.getElementById('bookingForm');
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const parentName = document.getElementById('parentName').value;
+            const program = document.getElementById('program-select').value;
+            
+            if (!program) {
+                alert("Molimo odaberite program!");
+                return;
+            }
+
+            // Here you would typically send data to a server
+            // For now, we'll just show a success message
+            alert(`Hvala Vam, ${parentName}! Vaša prijava za "${program}" je uspješno zaprimljena. Kontaktirat ćemo vas uskoro.`);
+            bookingForm.reset();
+        });
+    }
+
     // --- SHOP LOGIC ---
     const shopButtons = document.querySelectorAll('.btn-shop');
     shopButtons.forEach(btn => {
@@ -359,4 +379,88 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    // --- SCROLL ANIMATIONS ---
+    const revealElements = document.querySelectorAll('.card, .section-title, .section-subtitle, .hero-buttons, .team-member, .map-container');
+    
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                // Optional: Stop observing once revealed
+                // observer.unobserve(entry.target); 
+            }
+        });
+    }, {
+        root: null,
+        threshold: 0.15, // Trigger when 15% of element is visible
+        rootMargin: "0px 0px -50px 0px"
+    });
+
+    revealElements.forEach(el => {
+        el.classList.add('reveal');
+        revealObserver.observe(el);
+    });
+
+    // --- MODULE DETAILS TOGGLE ---
+    const toggleButtons = document.querySelectorAll('.toggle-details');
+    toggleButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const details = this.nextElementSibling;
+            details.classList.toggle('open');
+            
+            if (details.classList.contains('open')) {
+                this.textContent = 'Manje';
+            } else {
+                this.textContent = 'Saznaj više';
+            }
+        });
+    });
+
+    // --- GALLERY LOAD MORE / LESS ---
+    const loadMoreBtn = document.getElementById('loadMoreGallery');
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            const hiddenItems = document.querySelectorAll('.hidden-gallery-item');
+            const isExpanded = this.getAttribute('data-expanded') === 'true';
+
+            if (!isExpanded) {
+                // SHOW ITEMS
+                hiddenItems.forEach(item => {
+                    item.style.display = 'block'; // Make visible in layout
+                    
+                    // Small delay to allow browser to register display:block before animating
+                    setTimeout(() => {
+                        item.classList.add('reveal');
+                        item.classList.add('active');
+                    }, 20);
+                });
+                
+                this.textContent = 'Prikaži manje slika';
+                this.setAttribute('data-expanded', 'true');
+            } else {
+                // HIDE ITEMS
+                hiddenItems.forEach(item => {
+                    item.classList.remove('active'); // Trigger fade out animation
+                });
+
+                // Wait for animation to finish (0.8s matches CSS transition)
+                setTimeout(() => {
+                    hiddenItems.forEach(item => {
+                        item.style.display = 'none';
+                        item.classList.remove('reveal');
+                    });
+                    
+                    // Smooth scroll back to gallery title to prevent disorientation
+                    const gallerySection = document.getElementById('galerija');
+                    if (gallerySection) {
+                        gallerySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }, 800);
+
+                this.textContent = 'Prikaži više slika';
+                this.setAttribute('data-expanded', 'false');
+            }
+        });
+    }
 });
